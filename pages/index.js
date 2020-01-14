@@ -1,88 +1,62 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Head from 'next/head'
-import Nav from '../components/nav'
 
-const Home = () => (
-  <div>
-    <Head>
-      <title>Home</title>
-      <link rel="icon" href="/favicon.ico" />
-    </Head>
+import Header from '@/components/Header'
+import Footer from '@/components/Footer'
+import Author from '@/components/Author'
+import Advert from '@/components/advert'
+import '@/public/style/pages/index.css'
 
-    <Nav />
+import { Row, Col, List, Icon } from 'antd'
 
-    <div className="hero">
-      <h1 className="title">Welcome to Next.js!</h1>
-      <p className="description">
-        To get started, edit <code>pages/index.js</code> and save to reload.
-      </p>
+const Home = () => {
 
-      <div className="row">
-        <a href="https://nextjs.org/docs" className="card">
-          <h3>Documentation &rarr;</h3>
-          <p>Learn more about Next.js in the documentation.</p>
-        </a>
-        <a href="https://nextjs.org/learn" className="card">
-          <h3>Next.js Learn &rarr;</h3>
-          <p>Learn about Next.js by following an interactive tutorial!</p>
-        </a>
-        <a
-          href="https://github.com/zeit/next.js/tree/master/examples"
-          className="card"
-        >
-          <h3>Examples &rarr;</h3>
-          <p>Find other example boilerplates on the Next.js GitHub.</p>
-        </a>
-      </div>
+  const [myList, setMyList] = useState(
+    [
+      {title: '英雄联盟', context: '断剑重铸之日，骑士归来之时。'},
+      {title: '程序规范', context: '程序员最讨厌的事情是维护没有注释的代码，第二讨厌的的事情是自己写注释。'},
+      {title: '海月姬', context: '如果能够重生的话，我想，我想成为水母。想成为只是在海里自由地摇摇摆摆的水母。'},
+      {title: '普希金', context: '你最可爱，我说时来不及思索，但思索过后，还是这样说'}
+    ]
+  )
+  console.log(myList)
+  return (
+    <div>
+      <Head>
+        <title>Home</title>
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
+      <Header></Header>
+      <Row className="comm-main" type="flex" justify="center">
+        <Col className="comm-left" xs={24} sm={24} md={16} lg={18} xl={14}>
+          <div>
+            <List 
+              header={<div>最新日志</div>}
+              itemLayout="vertical"
+              dataSource={myList}
+              renderItem={item => (
+                <List.Item>
+                  <div className="list-title">{item.title}</div>
+                  <div className="list-icon">
+                    <span><Icon type="calendar" /> 2019-06-28</span>
+                    <span><Icon type="folder" /> 视频教程</span>
+                    <span><Icon type="fire" /> 5498人</span>
+                  </div>
+                  <div className="list-context">{item.context}</div>
+                </List.Item>
+              )}
+            />
+          </div>
+        </Col>
+  
+        <Col className="comm-right" xs={0} sm={0} md={7} lg={5} xl={4}>
+          <Author></Author>
+          <Advert></Advert>
+        </Col>
+      </Row>
+      <Footer></Footer>
     </div>
-
-    <style jsx>{`
-      .hero {
-        width: 100%;
-        color: #333;
-      }
-      .title {
-        margin: 0;
-        width: 100%;
-        padding-top: 80px;
-        line-height: 1.15;
-        font-size: 48px;
-      }
-      .title,
-      .description {
-        text-align: center;
-      }
-      .row {
-        max-width: 880px;
-        margin: 80px auto 40px;
-        display: flex;
-        flex-direction: row;
-        justify-content: space-around;
-      }
-      .card {
-        padding: 18px 18px 24px;
-        width: 220px;
-        text-align: left;
-        text-decoration: none;
-        color: #434343;
-        border: 1px solid #9b9b9b;
-      }
-      .card:hover {
-        border-color: #067df7;
-      }
-      .card h3 {
-        margin: 0;
-        color: #067df7;
-        font-size: 18px;
-      }
-      .card p {
-        margin: 0;
-        padding: 12px 0 0;
-        font-size: 13px;
-        color: #333;
-      }
-    `}</style>
-  </div>
-)
+  )
+}
 
 export default Home
