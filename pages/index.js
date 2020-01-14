@@ -5,7 +5,6 @@ import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import Author from '@/components/Author'
 import Advert from '@/components/advert'
-import '@/public/style/pages/index.css'
 
 import { Row, Col, List, Icon } from 'antd'
 
@@ -19,7 +18,7 @@ const Home = () => {
       {title: '普希金', context: '你最可爱，我说时来不及思索，但思索过后，还是这样说'}
     ]
   )
-  console.log(myList)
+  
   return (
     <div>
       <Head>
