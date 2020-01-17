@@ -1,4 +1,5 @@
 import React from 'react'
+import axios from 'axios'
 import Head from 'next/head'
 import ReactMarkdown from 'react-markdown'
 import MarkNav from 'markdown-navbar'
@@ -47,59 +48,78 @@ let markdown = '# P01:课程介绍和环境搭建\n' +
 '>>> cccccccccc\n\n'+
 '``` var a=11; ```'
 
-const Detail = () => (
-  <>
-    <Head>
-      <title>博客详情页</title>
-    </Head>
-    <Header />
-    <Row className="comm-main" type="flex" justify="center">
-      <Col className="comm-left" xs={24} sm={24} md={16} lg={18} xl={14}  >
-        <div>
-          <div className="bread-div">
-            <Breadcrumb>
-              <Breadcrumb.Item><a href="/">首页</a></Breadcrumb.Item>
-              <Breadcrumb.Item>视频列表</Breadcrumb.Item>
-              <Breadcrumb.Item>xxxx</Breadcrumb.Item>
-            </Breadcrumb>
-          </div>
+const Detail = (res) => {
 
+  console.log(res)
+
+  return (
+    <>
+      <Head>
+        <title>博客详情页</title>
+      </Head>
+      <Header />
+      <Row className="comm-main" type="flex" justify="center">
+        <Col className="comm-left" xs={24} sm={24} md={16} lg={18} xl={14}  >
           <div>
-            <div className="detail-title">文章标题</div>
-
-            <div className="list-icon center">
-              <span><Icon type="calendar" /> 2019-06-28</span>
-              <span><Icon type="folder" /> 视频教程</span>
-              <span><Icon type="fire" /> 5498人</span>
+            <div className="bread-div">
+              <Breadcrumb>
+                <Breadcrumb.Item><a href="/">首页</a></Breadcrumb.Item>
+                <Breadcrumb.Item>视频列表</Breadcrumb.Item>
+                <Breadcrumb.Item>xxxx</Breadcrumb.Item>
+              </Breadcrumb>
             </div>
-
-            <div className="detail-context">
-              <ReactMarkdown 
+  
+            <div>
+              <div className="detail-title">文章标题</div>
+  
+              <div className="list-icon center">
+                <span><Icon type="calendar" /> 2019-06-28</span>
+                <span><Icon type="folder" /> 视频教程</span>
+                <span><Icon type="fire" /> 5498人</span>
+              </div>
+  
+              <div className="detail-context">
+                <ReactMarkdown 
+                  source={markdown}
+                  escapeHtml={false}
+                />
+              </div>
+            </div>
+          </div>
+        </Col>
+  
+        <Col className="comm-right" xs={0} sm={0} md={7} lg={5} xl={4}>
+          <Author />
+          <Advert />
+          <Affix offsetTop={5}>
+            <div className="detail-nav comm-box">
+              <div className="nav-title">文章目录</div>
+              <MarkNav
+                className="article-menu"
                 source={markdown}
-                escapeHtml={false}
+                ordered={false}
               />
             </div>
-          </div>
-        </div>
-      </Col>
+          </Affix>
+        </Col>
+      </Row>
+      <Footer />
+   </>
+  )
+}
 
-      <Col className="comm-right" xs={0} sm={0} md={7} lg={5} xl={4}>
-        <Author />
-        <Advert />
-        <Affix offsetTop={5}>
-          <div className="detail-nav comm-box">
-            <div className="nav-title">文章目录</div>
-            <MarkNav
-              className="article-menu"
-              source={markdown}
-              ordered={false}
-            />
-          </div>
-        </Affix>
-      </Col>
-    </Row>
-    <Footer />
- </>
-)
+Detail.getInitialProps = async (context) => {
+  let id = context.query.id
+  const promise = new Promise((resovle) => {
+    axios('http://127.0.0.1:7001/default/getArticleById/' + id).then(
+      res => {
+        console.log(res, '11111111')
+        resovle(res)
+      }
+    )
+  })
+
+  return await promise
+}
 
 export default Detail

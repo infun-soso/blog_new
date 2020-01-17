@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
 import Head from 'next/head'
+import Link from 'next/link'
+import axios from 'axios'
 
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
@@ -8,16 +10,8 @@ import Advert from '@/components/advert'
 
 import { Row, Col, List, Icon } from 'antd'
 
-const Home = () => {
-
-  const [myList, setMyList] = useState(
-    [
-      {title: '英雄联盟', context: '断剑重铸之日，骑士归来之时。'},
-      {title: '程序规范', context: '程序员最讨厌的事情是维护没有注释的代码，第二讨厌的的事情是自己写注释。'},
-      {title: '海月姬', context: '如果能够重生的话，我想，我想成为水母。想成为只是在海里自由地摇摇摆摆的水母。'},
-      {title: '普希金', context: '你最可爱，我说时来不及思索，但思索过后，还是这样说'}
-    ]
-  )
+const Home = (list, list2) => {
+  const [myList, setMyList] = useState(list.data)
   
   return (
     <div>
@@ -35,13 +29,17 @@ const Home = () => {
               dataSource={myList}
               renderItem={item => (
                 <List.Item>
-                  <div className="list-title">{item.title}</div>
-                  <div className="list-icon">
-                    <span><Icon type="calendar" /> 2019-06-28</span>
-                    <span><Icon type="folder" /> 视频教程</span>
-                    <span><Icon type="fire" /> 5498人</span>
+                  <div className="list-title">
+                    <Link href={{pathname: '/detail', query: {id: item.id}}}>
+                      <a>{item.title}</a>
+                    </Link>
                   </div>
-                  <div className="list-context">{item.context}</div>
+                  <div className="list-icon">
+                    <span><Icon type="calendar" /> {item.addTime}</span>
+                    <span><Icon type="folder" /> {item.typeName}</span>
+                    <span><Icon type="fire" /> {item.view_count}人</span>
+                  </div>
+                  <div className="list-context">{item.introduce}</div>
                 </List.Item>
               )}
             />
@@ -56,6 +54,18 @@ const Home = () => {
       <Footer></Footer>
     </div>
   )
+}
+
+Home.getInitialProps = async () => {
+  const promise = new Promise((resolve) => {
+    axios('http://127.0.0.1:7001/default/getArticleList').then(
+      (res) => {
+        console.log(res, '222323')
+        resolve(res.data)
+      }
+    )
+  })
+  return promise
 }
 
 export default Home
