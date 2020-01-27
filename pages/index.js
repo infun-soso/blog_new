@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import Head from 'next/head'
 import Link from 'next/link'
 import axios from 'axios'
+import api from '../config/apiUrl'
 
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
@@ -58,7 +59,7 @@ const Home = (list, list2) => {
 
 Home.getInitialProps = async () => {
   const promise = new Promise((resolve) => {
-    axios('http://127.0.0.1:7001/default/getArticleList').then(
+    axios(api.getArticleList).then(
       (res) => {
         console.log(res, '222323')
         resolve(res.data)
