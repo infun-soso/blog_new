@@ -23,7 +23,7 @@ let markdown = '# P01:课程介绍和环境搭建\n' +
 '*这是倾斜的文字*`\n\n' +
 '***这是斜体加粗的文字***\n\n' +
 '~~这是加删除线的文字~~ \n\n'+
-'\`console.log(111)\` \n\n'+
+'`console.log(1112)` \n\n'+
 '# p02:来个Hello World 初始Vue3.0\n' +
 '> aaaaaaaaa\n' +
 '>> bbbbbbbbb\n' +
@@ -49,7 +49,9 @@ let markdown = '# P01:课程介绍和环境搭建\n' +
 '> aaaaaaaaa\n' +
 '>> bbbbbbbbb\n' +
 '>>> cccccccccc\n\n'+
-'``` var a=11; ```'
+'```\n'+
+'import marked from \'marked\';\n'+
+'```'
 
 
 
@@ -71,7 +73,7 @@ const Detail = (res) => {
     tables: true, // 支持Github形式的表格，必须打开gfm选项
     breaks: false, // 支持Github换行符，必须打开gfm选项，填写true或者false
     smartLists: true, // 优化列表输出 建议打开
-    highlight: function () {
+    highlight: function (code) {
       return hljs.highlightAuto(code).value
     } // 高亮规则 使用highlight
   })

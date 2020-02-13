@@ -4,6 +4,10 @@ import Link from 'next/link'
 import axios from 'axios'
 import api from '../config/apiUrl'
 
+import marked from 'marked'
+import hljs from 'highlight.js'
+import 'highlight.js/styles/monokai-sublime.css'
+
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import Author from '@/components/Author'
@@ -11,7 +15,24 @@ import Advert from '@/components/advert'
 
 import { Row, Col, List, Icon } from 'antd'
 
-const Home = (list, list2) => {
+const renderer = new marked.Renderer();
+marked.setOptions({
+  renderer: renderer,
+  gfm: true,
+  pedantic: false,
+  sanitize: false,
+  tables: true,
+  breaks: false,
+  smartLists: true,
+  smartypants: false,
+  sanitize:false,
+  xhtml: false,
+  highlight: function (code) {
+    return hljs.highlightAuto(code).value;
+  }
+});
+
+const Home = (list) => {
   const [myList, setMyList] = useState(list.data)
   
   return (
@@ -40,7 +61,7 @@ const Home = (list, list2) => {
                     <span><Icon type="folder" /> {item.typeName}</span>
                     <span><Icon type="fire" /> {item.view_count}人</span>
                   </div>
-                  <div className="list-context">{item.introduce}</div>
+                  <div className="list-context" dangerouslySetInnerHTML={{__html: marked(item.introduce)}}></div>
                 </List.Item>
               )}
             />
@@ -58,15 +79,8 @@ const Home = (list, list2) => {
 }
 
 Home.getInitialProps = async () => {
-  const promise = new Promise((resolve) => {
-    axios(api.getArticleList).then(
-      (res) => {
-        console.log(res, '222323')
-        resolve(res.data)
-      }
-    )
-  })
-  return promise
+  const promise = await axios(api.getArticleList)
+  return promise.data
 }
 
 export default Home
