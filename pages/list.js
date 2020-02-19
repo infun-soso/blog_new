@@ -8,7 +8,7 @@ import api from '../config/apiUrl'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import Author from '@/components/Author'
-import Advert from '@/components/advert'
+import Advert from '@/components/Advert'
 
 import { Row, Col, List, Icon, Breadcrumb } from 'antd'
 

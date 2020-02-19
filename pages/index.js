@@ -11,7 +11,7 @@ import 'highlight.js/styles/monokai-sublime.css'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import Author from '@/components/Author'
-import Advert from '@/components/advert'
+import Advert from '@/components/Advert'
 
 import { Row, Col, List, Icon } from 'antd'
 
