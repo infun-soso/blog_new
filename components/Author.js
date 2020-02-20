@@ -1,5 +1,5 @@
-import {Avatar, Divider} from 'antd'
 import '@/public/style/components/author.css'
+import {Avatar, Divider} from 'antd'
 
 const Author = () => {
   return (
