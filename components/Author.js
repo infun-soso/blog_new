@@ -1,4 +1,4 @@
-import '@/public/style/components/author.css'
+import '@/public/style/components/author.less'
 import {Avatar, Divider} from 'antd'
 
 const Author = () => {

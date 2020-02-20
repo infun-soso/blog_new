@@ -71,3 +71,7 @@ code {
  margin:8px  auto ;
 
 }
+
+.aplayer-lrc-current {
+  color: #1890ff !important;
+}
