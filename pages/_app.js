@@ -10,7 +10,7 @@ const DynamicAplayer = dynamic(
     ssr: false   //这个要加上,禁止使用 SSR
   }
 )
-console.log(DynamicAplayer)
+
 export default class MyApp extends App {
   static async getInitialProps ({ Component, router, ctx }) {
     let pageProps = {}

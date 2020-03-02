@@ -3,6 +3,9 @@ import Head from 'next/head'
 import Link from 'next/link'
 import axios from 'axios'
 import api from '../config/apiUrl'
+import '../public/style/pages/home.less'
+// import svgIcons from '../static/imgs/infun-blog-svg-icons.svg';
+// console.log(svgIcons)
 
 import marked from 'marked'
 import hljs from 'highlight.js'
@@ -12,8 +15,10 @@ import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import Author from '@/components/Author'
 import Advert from '@/components/Advert'
+import PostSummary from '@/components/post/PostSummary'
 
-import { Row, Col, List, Icon } from 'antd'
+import { Row, Col, List, Icon, Calendar } from 'antd'
+import { useEffect } from 'react'
 
 const renderer = new marked.Renderer();
 marked.setOptions({
@@ -32,9 +37,23 @@ marked.setOptions({
   }
 });
 
+const loadBgImg = (imageUrl) => {
+  const backgroundDOM = document.getElementById('background');
+  const background = new Image();
+  background.src = imageUrl;
+  background.onload = () => {
+    if (backgroundDOM) {
+      backgroundDOM.style.cssText = `opacity: 1; background-image: url(${
+        background.src
+      })`;
+    }
+  };
+};
+
 const Home = (list) => {
-  const [myList, setMyList] = useState(list.data)
-  
+  useEffect(() => {
+    loadBgImg('/static/imgs/kobe.png')
+  }, [])
   return (
     <div>
       <Head>
@@ -42,9 +61,13 @@ const Home = (list) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Header></Header>
-      <Row className="comm-main" type="flex" justify="center">
-        <Col className="comm-left" xs={24} sm={24} md={16} lg={18} xl={14}>
-          <div>
+      <section id="background" className="ad_wrapper" />
+      <div className="home_slogon">
+        <h1 className="glitch" data-value='HI, INFUN!'>HI, INFUN!</h1>
+      </div>
+      <div className="content">
+        {/* <Col className="comm-left" xs={24} sm={24} md={16} lg={18} xl={14}> */}
+          {/* <div>
             <List 
               header={<div>最新日志</div>}
               itemLayout="vertical"
@@ -65,14 +88,24 @@ const Home = (list) => {
                 </List.Item>
               )}
             />
-          </div>
-        </Col>
+          </div> */}
+          <h2 className="blog_summary_tips">
+            {/* <svg className={styles.icon}>
+              <use xlinkHref={`${svgIcons}${svgSprite.new}`} />
+            </svg> */}
+            The Latest!
+          </h2>
+          <PostSummary list={list}/>
+        {/* </Col> */}
   
-        <Col className="comm-right" xs={0} sm={0} md={7} lg={5} xl={4}>
+        {/* <Col className="comm-right" xs={0} sm={0} md={7} lg={5} xl={4}>
           <Author></Author>
           <Advert></Advert>
-        </Col>
-      </Row>
+          <div style={{ background: '#fff', border: '1px solid #d9d9d9', borderRadius: 4, margin: '.5rem 0 0 .5rem' }}>
+            <Calendar fullscreen={false} />
+          </div>
+        </Col> */}
+      </div>
       <Footer></Footer>
     </div>
   )

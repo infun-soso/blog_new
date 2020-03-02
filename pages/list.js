@@ -14,7 +14,6 @@ import { Row, Col, List, Icon, Breadcrumb } from 'antd'
 
 const ListPage = (list) => {
   const [myList, setMyList] = useState(list.data)
-  console.log(list.data, 1111)
   useEffect(() => {
     setMyList(list.data)
   }, [list.data])

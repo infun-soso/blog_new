@@ -1,0 +1,48 @@
+// @white: '255, 255, 255';
+// @black: '#000000';
+.header{
+  position: fixed;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 3.25rem;
+  font: 0.8rem 'Ubuntu', sans-serif;
+  background: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 1px 40px -8px rgba(0, 0, 0, 0.5);
+  z-index: 2;
+  transition: all 500ms ease;
+  .ant-menu-item {
+    font-size: 0.8rem !important;
+  }
+}
+
+.clear_navbar_bg {
+  box-shadow: none;
+  background: transparent;
+  transition: all 600ms ease;
+  &:hover {
+    background: rgba(255, 255, 255, 0.95);
+    box-shadow: 0 1px 40px -8px rgba(0, 0, 0, 0.5);
+  }
+}
+
+.header-logo{
+  color:#1e90ff;
+  font-size: 1.4rem;
+  text-align: left;
+}
+.header-txt{
+  font-size: 0.6rem;
+  color: #999;
+  display: inline-block;
+  padding-left: 0.3rem;
+}
+.ant-meu{
+  line-height: 2.8rem;
+}
+.ant-menu-item{
+  font-size:1rem !important;
+  padding-left:1rem;
+  padding-right:1rem;
+}

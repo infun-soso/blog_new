@@ -1,6 +1,11 @@
 body {
   background-color: #f6f6f6;  
 }
+
+html {
+  font-size: 20px;
+}
+
 .comm-left{
   background-color: #FFF;
   padding:.3rem;
@@ -50,15 +55,14 @@ pre >code{
   color:#FFF;
 }
 code {
-  display: inline-block ;
-  background-color:#f3f3f3;
-  border:1px solid #fdb9cc;
-  border-radius:3px;
-  font-size: 12px;
-  padding-left: 5px;
-  padding-right: 5px;
-  color:#4f4f4f;
-  margin: 0px 3px;
+  margin-top: 0;
+  padding: 2px;
+  height: 100%;
+  background: #fff5f5;
+  font-size: 0.75rem;
+  color: #ff502c;
+  text-shadow: none;
+  border-radius: 2px;
 
 }
 
@@ -74,4 +78,8 @@ code {
 
 .aplayer-lrc-current {
   color: #1890ff !important;
+}
+
+.ant-fullcalendar-header {
+  padding: 10px 0;
 }
