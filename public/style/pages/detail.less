@@ -16,6 +16,24 @@
   font-size: 1rem;
 }
 
+.menu {
+  position: fixed;
+  margin-left: 10px;
+  margin-top: 10px;
+  // top: 25.6rem;
+  // margin-left: 42rem;
+
+  .toc-link {
+    font-size: 0.8rem;
+    color: #404040;
+    text-shadow: 0 0 1px rgba(0, 0, 0, 0.1);
+  }
+
+  .is-active-link::before {
+    background: #ffa500;
+  }
+}
+
 table {
   border-collapse: collapse;
   margin: 1rem 0;

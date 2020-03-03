@@ -1,11 +1,10 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import axios from 'axios'
 import Head from 'next/head'
-import marked from 'marked'
+import tocbot from 'tocbot';
+import 'tocbot/dist/tocbot.css';
 import hljs from "highlight.js"
 import 'highlight.js/styles/monokai-sublime.css'
-import Tocify from '../components/tocify.tsx'
-import 'markdown-navbar/dist/navbar.css'
 import {Row, Col, Breadcrumb, Icon, Affix} from 'antd'
 import api from '../config/apiUrl'
 
@@ -14,35 +13,52 @@ import Author from '../components/Author'
 import Advert from '../components/Advert'
 import Footer from '../components/Footer'
 
-import '@/public/style/pages/detail.css'
+import '@/public/style/pages/detail.less'
 
 const Detail = (res) => {
   // console.log(res)
   // const [detail, setDetail] = useState({})
-  console.log(res.data[0])
   const detail = res.data[0]
-  const tocify = new Tocify()
-  const renderer = new marked.Renderer()
-  renderer.heading = function(text, level, raw) {
-    console.log(text, level, raw)
-    const anchor = tocify.add(text, level)
-    return `<a id="${anchor}" href="#${anchor}" class="anchor-fix"><h${level}>${text}</h${level}></a>\n`;
+  let html = detail.article_content
+  const tocbotInit = () => {
+    const headers = document.querySelectorAll('h1, h2, h3, h4, h5, h6');
+    for (let i = 0, len = headers.length; i < len; i += 1) {
+      headers[i].id = `header-${i}`;
+    }
+    tocbot.init({
+      tocSelector: '.menu',
+      contentSelector: '.detail-context',
+      headingSelector: 'h1, h2, h3, h4, h5, h6',
+    });
   }
+  const hljsInit = () => {
+    const codeBlock = document.querySelectorAll('pre code');
+    for (let i = 0, l = codeBlock.length; i < l; i += 1) {
+      hljs.highlightBlock(codeBlock[i]);
+    }
+  }
+  const fixToc = () => {
+    const menu = document.querySelector('.menu');
 
-  marked.setOptions({
-    renderer: renderer,
-    gfm: true, // 启动github样式的markdown
-    pedantic: false, // 只解析符合Markdown定义的，不修正Markdown的错误。填写true或者false
-    sanitize: false, // 原始输出，忽略HTML标签，这个作为一个开发人员，一定要写flase
-    tables: true, // 支持Github形式的表格，必须打开gfm选项
-    breaks: false, // 支持Github换行符，必须打开gfm选项，填写true或者false
-    smartLists: true, // 优化列表输出 建议打开
-    highlight: function (code) {
-      return hljs.highlightAuto(code).value
-    } // 高亮规则 使用highlight
-  })
-
-  let html = marked(detail.article_content)
+    window.addEventListener(
+      'scroll',
+      _.throttle(() => {
+        const tops =
+          document.documentElement.scrollTop || document.body.scrollTop;
+        if (tops < 440) {
+          menu.style.top = `${512 - tops}px`;
+        } else {
+          menu.style.top = '4rem';
+        }
+      }, 10),
+    );
+  }
+  // if (global) initTocbot() 
+  useEffect(() => {
+    tocbotInit()
+    hljsInit()
+    fixToc()
+  }, [])
   return (
     <>
       <Head>
@@ -79,14 +95,9 @@ const Detail = (res) => {
         <Col className="comm-right" xs={0} sm={0} md={7} lg={5} xl={4}>
           <Author />
           <Advert />
-          <Affix offsetTop={5}>
-            <div className="detail-nav comm-box">
-              <div className="nav-title">文章目录</div>
-              <div className="toc-list">
-                {tocify && tocify.render()}
-              </div>
-            </div>
-          </Affix>
+          <div className="menu">
+              {/* {tocify && tocify.render()} */}
+          </div>
         </Col>
       </Row>
       <Footer />

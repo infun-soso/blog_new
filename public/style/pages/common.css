@@ -83,3 +83,7 @@ code {
 .ant-fullcalendar-header {
   padding: 10px 0;
 }
+
+ol {
+  list-style: none;
+}
