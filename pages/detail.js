@@ -5,6 +5,7 @@ import tocbot from 'tocbot';
 import 'tocbot/dist/tocbot.css';
 import hljs from "highlight.js"
 import 'highlight.js/styles/monokai-sublime.css'
+import { noop } from '@/tools/tools';
 import {Row, Col, Breadcrumb, Icon, Affix} from 'antd'
 import api from '../config/apiUrl'
 
@@ -12,12 +13,11 @@ import Header from '../components/Header'
 import Author from '../components/Author'
 import Advert from '../components/Advert'
 import Footer from '../components/Footer'
+import Banner from '@/components/common/Banner'
 
 import '@/public/style/pages/detail.less'
 
 const Detail = (res) => {
-  // console.log(res)
-  // const [detail, setDetail] = useState({})
   const detail = res.data[0]
   let html = detail.article_content
   const tocbotInit = () => {
@@ -58,6 +58,9 @@ const Detail = (res) => {
     tocbotInit()
     hljsInit()
     fixToc()
+    return () => {
+      window.removeEventListener('scroll', noop)
+    }
   }, [])
   return (
     <>
@@ -65,6 +68,7 @@ const Detail = (res) => {
         <title>博客详情页</title>
       </Head>
       <Header />
+      <Banner imgUrl={detail.cover_url} height='50vh'/>
       <Row className="comm-main" type="flex" justify="center">
         <Col className="comm-left" xs={24} sm={24} md={16} lg={18} xl={14}  >
           <div>

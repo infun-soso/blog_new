@@ -2,7 +2,8 @@
 import React, {useState} from 'react';
 import cs from 'classnames'
 import Link from 'next/link'
-// import img from ''
+import svgIcons from '@/static/imgs/infun-blog-svg-icons.svg'
+import { svgSprite } from '@/config/constants'
 import {
   LazyLoadImage,
 } from 'react-lazy-load-image-component';
@@ -10,7 +11,6 @@ import '@/public/style/components/post/post-summary.less'
 
 const PostSummary = (props) => {
   const [myList, setMyList] = useState(props.list.data)
-  console.log(myList)
   return (
     <>
       {myList.map((item, index) => (
@@ -37,9 +37,9 @@ const PostSummary = (props) => {
           </div>
           <div className="blog_info">
             <p className="publish_date">
-              {/* <svg>
+              <svg>
                 <use xlinkHref={`${svgIcons}${svgSprite.time}`} />
-              </svg> */}
+              </svg>
               Released {item.addTime}
             </p>
             {/* <Link to={`${routePath.blogDetail}${post._id}`}> */}
@@ -47,23 +47,23 @@ const PostSummary = (props) => {
             {/* </Link> */}
             <div className="extra_info">
               <span>
-                {/* <svg>
+                <svg>
                   <use xlinkHref={`${svgIcons}${svgSprite.eye}`} />
-                </svg> */}
+                </svg>
                 {item.view_count} PV
               </span>
               <span>
-                {/* <svg>
+                <svg>
                   <use xlinkHref={`${svgIcons}${svgSprite.comments1}`} />
-                </svg> */}
+                </svg>
                 <Link href={`/detail?id=${item.id}`}>
                   <span>{item.view_count}{' '}{item.view_count > 1 ? 'Likes' : 'Like'}</span>
                 </Link>
               </span>
               <span className="category">
-                {/* <svg>
+                <svg>
                   <use xlinkHref={`${svgIcons}${svgSprite.closeFolder}`} />
-                </svg> */}
+                </svg>
                 <Link href={`/detail?id=${item.id}`}>
                   <span>{item.typeName}</span>
                 </Link>
@@ -71,11 +71,11 @@ const PostSummary = (props) => {
             </div>
             <p className="summary_content">{item.introduce}</p>
             <div className="show_detail_wrapper">
-              {/* <Link to={`${routePath.blogDetail}${post._id}`}>
-                <svg className={styles.icon_more}>
+              <Link href={`/detail?id=${item.id}`}>
+                <svg className="icon_more">
                   <use xlinkHref={`${svgIcons}${svgSprite.more}`} />
                 </svg>
-              </Link> */}
+              </Link>
             </div>
           </div>
         </div>

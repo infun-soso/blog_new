@@ -9,6 +9,7 @@ import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import Author from '@/components/Author'
 import Advert from '@/components/Advert'
+import Banner from '@/components/common/Banner'
 
 import { Row, Col, List, Icon, Breadcrumb } from 'antd'
 
@@ -24,6 +25,7 @@ const ListPage = (list) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Header></Header>
+      <Banner />
       <Row className="comm-main" type="flex" justify="center">
         <Col className="comm-left" xs={24} sm={24} md={16} lg={18} xl={14}>
           <div>

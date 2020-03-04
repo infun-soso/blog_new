@@ -1,11 +1,10 @@
-import React, { useState } from 'react'
+import React, { useEffect } from 'react'
 import Head from 'next/head'
-import Link from 'next/link'
 import axios from 'axios'
 import api from '../config/apiUrl'
 import '../public/style/pages/home.less'
-// import svgIcons from '../static/imgs/infun-blog-svg-icons.svg';
-// console.log(svgIcons)
+import svgIcons from '@/static/imgs/infun-blog-svg-icons.svg'
+import { svgSprite } from '@/config/constants'
 
 import marked from 'marked'
 import hljs from 'highlight.js'
@@ -16,9 +15,9 @@ import Footer from '@/components/Footer'
 import Author from '@/components/Author'
 import Advert from '@/components/Advert'
 import PostSummary from '@/components/post/PostSummary'
+import Banner from '@/components/common/Banner'
 
 import { Row, Col, List, Icon, Calendar } from 'antd'
-import { useEffect } from 'react'
 
 const renderer = new marked.Renderer();
 marked.setOptions({
@@ -37,23 +36,8 @@ marked.setOptions({
   }
 });
 
-const loadBgImg = (imageUrl) => {
-  const backgroundDOM = document.getElementById('background');
-  const background = new Image();
-  background.src = imageUrl;
-  background.onload = () => {
-    if (backgroundDOM) {
-      backgroundDOM.style.cssText = `opacity: 1; background-image: url(${
-        background.src
-      })`;
-    }
-  };
-};
 
 const Home = (list) => {
-  useEffect(() => {
-    loadBgImg('/static/imgs/kobe.png')
-  }, [])
   return (
     <div>
       <Head>
@@ -61,7 +45,7 @@ const Home = (list) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Header></Header>
-      <section id="background" className="ad_wrapper" />
+      <Banner />
       <div className="home_slogon">
         <h1 className="glitch" data-value='HI, INFUN!'>HI, INFUN!</h1>
       </div>
@@ -90,9 +74,9 @@ const Home = (list) => {
             />
           </div> */}
           <h2 className="blog_summary_tips">
-            {/* <svg className={styles.icon}>
+            <svg className="icon">
               <use xlinkHref={`${svgIcons}${svgSprite.new}`} />
-            </svg> */}
+            </svg>
             The Latest!
           </h2>
           <PostSummary list={list}/>
