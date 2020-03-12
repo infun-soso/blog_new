@@ -80,7 +80,7 @@ const Detail = (res) => {
               </Breadcrumb>
             </div>
   
-            <div>
+            <div style={{padding: '0 2rem'}}>
               <div className="detail-title">{detail.title}</div>
   
               <div className="list-icon center">

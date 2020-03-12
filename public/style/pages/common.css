@@ -39,33 +39,6 @@ html {
   display: inline-block;
   padding: 0 10px;
 }
-pre{
-  display: block;
-  background-color: #283646 !important;
-  padding: .5rem !important;
-  overflow-y: auto;
-  font-weight: 300;
-  font-family: Menlo, monospace;
-  border-radius: .3rem;
-}
-
-pre >code{
-  border:0px !important;
-  background-color: #283646 !important;
-  color:#FFF;
-}
-code {
-  margin-top: 0;
-  padding: 2px;
-  height: 100%;
-  background: #fff5f5;
-  font-size: 0.75rem;
-  color: #ff502c;
-  text-shadow: none;
-  border-radius: 2px;
-
-}
-
 .list-context img{
  width:100% ;
  border-radius:5px;
@@ -82,8 +55,4 @@ code {
 
 .ant-fullcalendar-header {
   padding: 10px 0;
-}
-
-ol {
-  list-style: none;
 }
