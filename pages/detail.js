@@ -46,7 +46,7 @@ const Detail = (res) => {
         const tops =
           document.documentElement.scrollTop || document.body.scrollTop;
         if (tops < 440) {
-          menu.style.top = `${512 - tops}px`;
+          menu.style.top = `${845 - tops}px`;
         } else {
           menu.style.top = '4rem';
         }
